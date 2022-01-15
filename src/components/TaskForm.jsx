@@ -10,22 +10,40 @@ function TaskForm() {
    }
    const handleSubmit=e=>{
   e.preventDefault()
-  addTask(title)
-  setTitle('')
+  if(!editItem){
+    addTask(title)
+    setTitle('')
+  }else{
+      editTask(title,editItem.id)
+  }
+
 }
    
 useEffect(()=>{
-
-})
+ if(editItem){
+     setTitle(editItem.title)
+//   console.log(editItem);
+ }else{
+     setTitle('')
+ }
+},[editItem])
    
    return (
        <form onSubmit={handleSubmit} className='form'>
-           <input onChange={handleChange} type="text" className='task-input' placeholder='Add Task' required/>
+           <input 
+           onChange={handleChange}
+            type="text"
+            value={title}
+             className='task-input'
+              placeholder='Add Task'
+               required/>
            <div className='buttons'>
                <button 
                type='submit' 
                className='btn add-task-btn' 
-               value={title}>Add Task</button>
+               value={title}>
+                  {editItem ? 'Edit Task' : 'Add Task'}
+                   </button>
                <button onClick={clearList}  
                className='btn clear-btn'>Clear</button>
 
