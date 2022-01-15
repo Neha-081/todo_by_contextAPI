@@ -1,8 +1,8 @@
-import React,{useContext,useState} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import { TaskListContext } from '../context/TaskListContext'
 
 function TaskForm() {
-   const {addTask}= useContext(TaskListContext)
+   const {addTask,clearList,editItem,editTask}= useContext(TaskListContext)
   const [title,setTitle]=useState('')
   
    const handleChange=e=>{
@@ -14,6 +14,9 @@ function TaskForm() {
   setTitle('')
 }
    
+useEffect(()=>{
+
+})
    
    return (
        <form onSubmit={handleSubmit} className='form'>
@@ -23,7 +26,8 @@ function TaskForm() {
                type='submit' 
                className='btn add-task-btn' 
                value={title}>Add Task</button>
-               <button  className='btn clear-btn'>Clear</button>
+               <button onClick={clearList}  
+               className='btn clear-btn'>Clear</button>
 
 
            </div>
